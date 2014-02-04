@@ -1,0 +1,53 @@
+<h1><%= link_to "Products", root_url %></h1>
+
+<hr />
+
+<%= form_tag products_path, method: :get do %>
+  <%= text_field_tag :search, params[:search], size: 30 %>
+  <%= submit_tag "Search", name: nil %>
+<% end %><br />
+
+<hr />
+
+<h3>Import Products</h3>
+<%= form_tag import_products_path, multipart: true do %>
+<%= file_field_tag :file %>
+<%=  submit_tag "Import" %>
+<% end %>
+
+<hr />
+
+<table id="tableimg" border=1>
+	<tr>
+		<th>item code</th>
+		<th>product code</th>
+		<th>description</th>
+		<th>keyword</th>
+		<th>url</th>
+		<th>image</th>
+	</tr>
+
+<% @products.each do |product| %>
+	<tr>
+		<td><%= product.itemcode %></td>
+		<td><%= product.productcode %></td>
+		<td><%= product.description %></td>
+		<td><%= product.keyword %></td>
+		<td><%= link_to "Product Url", product.url, target: '_blank', :style => "width:20px", :style =>"height:20px" %></td>
+		<td><%= image_tag product.image %></td>
+	</tr>
+<% end %>
+
+</table>
+
+<!--or :target => '_blank'-->
+
+
+
+<!--
+<script>
+if (jQuery.ui) {
+  alert("ui is loaded");
+}
+</script>
+-->
